@@ -1,0 +1,231 @@
+{% extends "base.html" %} {% block title %}My Account — Orchard{% endblock %} {%
+block extra_css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/account.css') }}"
+/>
+{% endblock %} {% block content %}
+
+<section class="account-page">
+  <!-- Decorative background -->
+  <div class="account-orb account-orb--one"></div>
+  <div class="account-orb account-orb--two"></div>
+  <div class="account-orb account-orb--three"></div>
+
+  <div class="account-container">
+    <!-- =========================================
+         ACCOUNT HEADER
+         ========================================= -->
+
+    <div class="account-header">
+      <div class="account-avatar">{{ current_user.username[0]|upper }}</div>
+
+      <div class="account-header__content">
+        <span class="account-eyebrow"> 🍃 YOUR ORCHARD </span>
+
+        <h1>Hello, {{ current_user.username }}.</h1>
+
+        <p>
+          Welcome back to your Orchard account. Everything you need is growing
+          right here.
+        </p>
+      </div>
+    </div>
+
+    <!-- =========================================
+         ACCOUNT INFORMATION
+         ========================================= -->
+
+    <div class="account-grid">
+      <div class="account-info-card">
+        <div class="account-card-heading">
+          <div class="account-card-icon account-card-icon--green">👤</div>
+
+          <div>
+            <span>ACCOUNT</span>
+            <h2>Your information</h2>
+          </div>
+        </div>
+
+        <div class="account-info-list">
+          <div class="account-info-row">
+            <span>Username</span>
+            <strong>{{ current_user.username }}</strong>
+          </div>
+
+          <div class="account-info-row">
+            <span>Email</span>
+            <strong>{{ current_user.email }}</strong>
+          </div>
+
+          <div class="account-info-row">
+            <span>Account status</span>
+
+            <strong class="account-status">
+              <span class="account-status__dot"></span>
+              Active
+            </strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================
+           ACCOUNT ACTIONS
+           ========================================= -->
+
+      <div class="account-actions-card">
+        <div class="account-card-heading">
+          <div class="account-card-icon account-card-icon--orange">✨</div>
+
+          <div>
+            <span>QUICK ACTIONS</span>
+            <h2>Explore Orchard</h2>
+          </div>
+        </div>
+
+        <div class="account-actions">
+          <a href="{{ url_for('product.products') }}" class="account-action">
+            <span class="account-action__icon"> 🍊 </span>
+
+            <span class="account-action__content">
+              <strong>Explore products</strong>
+              <small>Discover fresh fruits, vegetables and seeds.</small>
+            </span>
+
+            <span class="account-action__arrow"> → </span>
+          </a>
+
+          <a href="{{ url_for('main.home') }}" class="account-action">
+            <span class="account-action__icon"> 🏡 </span>
+
+            <span class="account-action__content">
+              <strong>Back to Orchard</strong>
+              <small>Return to the Orchard marketplace.</small>
+            </span>
+
+            <span class="account-action__arrow"> → </span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================
+         SELLER PORTAL
+         ========================================= -->
+
+    <div class="seller-portal">
+      <div class="seller-portal__glow"></div>
+
+      {% if current_user.is_seller %} {% if current_user.store %}
+
+      <!-- SELLER WITH STORE -->
+
+      <div class="seller-portal__icon seller-portal__icon--green">🌿</div>
+
+      <div class="seller-portal__content">
+        <span class="seller-portal__eyebrow"> YOUR ORCHARD STORE </span>
+
+        <h3>Your store is ready.</h3>
+
+        <p>
+          Manage your products, orders and everything growing in your store.
+        </p>
+
+        <a
+          href="{{ url_for('store.dashboard') }}"
+          class="seller-portal__button seller-portal__button--green"
+        >
+          Store Dashboard
+          <span>→</span>
+        </a>
+      </div>
+
+      {% else %}
+
+      <!-- SELLER WITHOUT STORE -->
+
+      <div class="seller-portal__icon seller-portal__icon--orange">🍊</div>
+
+      <div class="seller-portal__content">
+        <span class="seller-portal__eyebrow"> SELL ON ORCHARD </span>
+
+        <h3>Your store is waiting.</h3>
+
+        <p>
+          Create your own Orchard store and start sharing your fresh produce
+          with customers.
+        </p>
+
+        <a
+          href="{{ url_for('store.create_store') }}"
+          class="seller-portal__button seller-portal__button--orange"
+        >
+          Create Your Store
+          <span>→</span>
+        </a>
+      </div>
+
+      {% endif %} {% elif current_user.seller_request_status == "pending" %}
+
+      <!-- APPLICATION PENDING -->
+
+      <div class="seller-portal__icon seller-portal__icon--lemon">⏳</div>
+
+      <div class="seller-portal__content">
+        <span class="seller-portal__eyebrow"> SELLER APPLICATION </span>
+
+        <h3>We're reviewing your application.</h3>
+
+        <p>
+          Your seller application is currently under review. We'll let you know
+          as soon as there's an update.
+        </p>
+
+        <span class="seller-portal__status">
+          <span class="seller-portal__status-dot"></span>
+          Application under review
+        </span>
+      </div>
+
+      {% else %}
+
+      <!-- NOT A SELLER -->
+
+      <div class="seller-portal__icon seller-portal__icon--berry">🧺</div>
+
+      <div class="seller-portal__content">
+        <span class="seller-portal__eyebrow"> GROW WITH ORCHARD </span>
+
+        <h3>Have fresh produce to sell?</h3>
+
+        <p>
+          Bring your fruits, vegetables or seeds to Orchard and create a
+          beautiful store for your customers.
+        </p>
+
+        <a
+          href="{{ url_for('store.seller_apply') }}"
+          class="seller-portal__button seller-portal__button--berry"
+        >
+          Become a Seller
+          <span>→</span>
+        </a>
+      </div>
+
+      {% endif %}
+    </div>
+
+    <!-- =========================================
+         LOGOUT
+         ========================================= -->
+
+    <div class="account-footer">
+      <a href="{{ url_for('auth.logout') }}" class="account-logout">
+        <span>↗</span>
+        Log out of Orchard
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

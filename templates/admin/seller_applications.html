@@ -1,0 +1,150 @@
+{% extends "base.html" %} {% block title %}Seller Applications — Orchard{%
+endblock %} {% block extra_css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/admin.css') }}"
+/>
+{% endblock %} {% block content %}
+
+<section class="seller-applications-page">
+  <div class="admin-container">
+    <!-- HEADER -->
+    <div class="applications-header">
+      <div>
+        <span class="admin-eyebrow"> 🌱 SELLER VERIFICATION </span>
+
+        <h1>Seller Applications</h1>
+
+        <p>
+          Review farmers and sellers who want to grow their business on Orchard.
+        </p>
+      </div>
+
+      <a href="{{ url_for('admin.dashboard') }}" class="applications-back">
+        ← Dashboard
+      </a>
+    </div>
+
+    <!-- APPLICATION COUNT -->
+    <div class="applications-summary">
+      <div class="applications-summary__icon">⏳</div>
+
+      <div>
+        <span>PENDING APPLICATIONS</span>
+
+        <strong> {{ users|length }} </strong>
+
+        <p>
+          {% if users|length == 0 %} No applications are waiting for review. {%
+          elif users|length == 1 %} One seller is waiting for your review. {%
+          else %} Sellers are waiting for your review. {% endif %}
+        </p>
+      </div>
+    </div>
+
+    <!-- APPLICATIONS -->
+    {% if users %}
+
+    <div class="applications-list">
+      {% for user in users %}
+
+      <article class="application-card">
+        <div class="application-card__top">
+          <div class="application-avatar">{{ user.username[0]|upper }}</div>
+
+          <div class="application-user">
+            <span class="application-label"> SELLER APPLICANT </span>
+
+            <h2>{{ user.username }}</h2>
+
+            <p>{{ user.email }}</p>
+          </div>
+
+          <span class="application-status"> Pending </span>
+        </div>
+
+        <div class="application-details">
+          <div class="application-detail">
+            <span> APPLICATION STATUS </span>
+
+            <strong> {{ user.seller_request_status|capitalize }} </strong>
+          </div>
+
+          <div class="application-detail">
+            <span> SELLER REQUESTED </span>
+
+            <strong>
+              {% if user.seller_requested %} Yes {% else %} No {% endif %}
+            </strong>
+          </div>
+
+          <div class="application-detail">
+            <span> VERIFIED </span>
+
+            <strong>
+              {% if user.is_verified %} Yes {% else %} Not yet {% endif %}
+            </strong>
+          </div>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="application-actions">
+          <form
+            method="POST"
+            action="{{ url_for('admin.approve_seller', user_id=user.id) }}"
+          >
+            <button
+              type="submit"
+              class="application-button application-button--approve"
+            >
+              <span>✓</span>
+              Approve Seller
+            </button>
+          </form>
+
+          <form
+            method="POST"
+            action="{{ url_for('admin.reject_seller', user_id=user.id) }}"
+          >
+            <button
+              type="submit"
+              class="application-button application-button--reject"
+            >
+              <span>×</span>
+              Reject
+            </button>
+          </form>
+        </div>
+      </article>
+
+      {% endfor %}
+    </div>
+
+    {% else %}
+
+    <!-- EMPTY STATE -->
+    <div class="applications-empty">
+      <div class="applications-empty__icon">🌿</div>
+
+      <span> ALL CAUGHT UP </span>
+
+      <h2>No seller applications</h2>
+
+      <p>
+        There are currently no pending seller applications waiting for your
+        review.
+      </p>
+
+      <a
+        href="{{ url_for('admin.dashboard') }}"
+        class="applications-empty__button"
+      >
+        Back to Dashboard
+      </a>
+    </div>
+
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends "base.html" %} {% block title %}Become a Seller — Orchard{% endblock
+%} {% block extra_css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/seller.css') }}"
+/>
+{% endblock %} {% block content %}
+
+<section class="seller-page">
+  <!-- Decorative background shapes -->
+  <div class="seller-orb seller-orb--one"></div>
+  <div class="seller-orb seller-orb--two"></div>
+  <div class="seller-orb seller-orb--three"></div>
+
+  <div class="seller-container">
+    <!-- Header -->
+    <div class="seller-heading">
+      <div class="seller-heading__badge">
+        <span>🌱</span>
+        GROW WITH ORCHARD
+      </div>
+
+      <h1>
+        Turn your harvest
+        <span>into something beautiful.</span>
+      </h1>
+
+      <p>
+        Create your Orchard store and share your fresh fruits, vegetables and
+        seeds with customers looking for something naturally good.
+      </p>
+    </div>
+
+    <!-- Application Card -->
+    <div class="seller-glass-card">
+      <div class="seller-card-decoration seller-card-decoration--one"></div>
+      <div class="seller-card-decoration seller-card-decoration--two"></div>
+
+      <div class="seller-card__top">
+        <div class="seller-icon">🌿</div>
+
+        <div>
+          <span class="seller-card__eyebrow"> SELLER APPLICATION </span>
+
+          <h2>Let's grow your store.</h2>
+
+          <p>Tell us a little about your farm or business.</p>
+        </div>
+      </div>
+
+      <form method="POST" class="seller-form">
+        {{ form.hidden_tag() }}
+
+        <div class="seller-field">
+          {{ form.store_name.label }} {{ form.store_name( class="seller-input",
+          placeholder="e.g. Green Valley Farm" ) }} {% for error in
+          form.store_name.errors %}
+          <span class="seller-error"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="seller-field">
+          {{ form.location.label }} {{ form.location( class="seller-input",
+          placeholder="e.g. Lagos, Nigeria" ) }} {% for error in
+          form.location.errors %}
+          <span class="seller-error"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="seller-field">
+          {{ form.description.label }} {{ form.description( class="seller-input
+          seller-textarea", placeholder="Tell us about your farm, produce, or
+          business..." ) }} {% for error in form.description.errors %}
+          <span class="seller-error"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="seller-submit-area">
+          {{ form.submit( class="seller-submit" ) }}
+
+          <span class="seller-submit-note">
+            🍃 Your application will be reviewed by Orchard.
+          </span>
+        </div>
+      </form>
+    </div>
+
+    <!-- Small benefits -->
+    <div class="seller-benefits">
+      <div class="seller-benefit">
+        <span>🍊</span>
+        <div>
+          <strong>Showcase your produce</strong>
+          <small>Give your products a beautiful home.</small>
+        </div>
+      </div>
+
+      <div class="seller-benefit">
+        <span>🧺</span>
+        <div>
+          <strong>Reach customers</strong>
+          <small>Connect with people who love fresh produce.</small>
+        </div>
+      </div>
+
+      <div class="seller-benefit">
+        <span>🌱</span>
+        <div>
+          <strong>Grow your business</strong>
+          <small>Build your own presence on Orchard.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,521 @@
+/* =========================================================
+   ORCHARD STORES
+   ========================================================= */
+
+.stores-page,
+.store-page {
+  min-height: 100vh;
+  padding: 120px 6% 80px;
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(121, 169, 90, 0.14),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(242, 140, 40, 0.12),
+      transparent 25%
+    ),
+    linear-gradient(135deg, #fff9ed 0%, #fffbf3 48%, #f5f8ef 100%);
+}
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.stores-header {
+  max-width: 850px;
+  margin: 0 auto 55px;
+  text-align: center;
+}
+
+.stores-eyebrow,
+.store-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
+  border: 1px solid rgba(33, 74, 58, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--orchard);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.stores-header h1 {
+  margin: 20px 0 15px;
+  color: var(--orchard);
+  font-size: clamp(2.6rem, 6vw, 5.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.stores-header p {
+  max-width: 650px;
+  margin: 0 auto;
+  color: rgba(32, 40, 32, 0.68);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+/* =========================================================
+   STORE GRID
+   ========================================================= */
+
+.stores-grid {
+  width: min(1250px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* =========================================================
+   STORE CARD
+   ========================================================= */
+
+.store-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 310px;
+  padding: 28px;
+  border: 1px solid rgba(33, 74, 58, 0.1);
+  border-radius: 30px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.82),
+    rgba(255, 255, 255, 0.48)
+  );
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 24px 65px rgba(33, 74, 58, 0.08);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.store-card::before {
+  content: "";
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  right: -65px;
+  top: -65px;
+  border-radius: 50%;
+  background: rgba(121, 169, 90, 0.14);
+  pointer-events: none;
+}
+
+.store-card::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: -45px;
+  bottom: -45px;
+  border-radius: 50%;
+  background: rgba(242, 140, 40, 0.1);
+  pointer-events: none;
+}
+
+.store-card:hover {
+  transform: translateY(-9px);
+  border-color: rgba(33, 74, 58, 0.18);
+  box-shadow: 0 35px 80px rgba(33, 74, 58, 0.14);
+}
+
+.store-card-icon {
+  position: relative;
+  z-index: 2;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 25px;
+  border-radius: 20px;
+  background: rgba(121, 169, 90, 0.15);
+  font-size: 1.65rem;
+}
+
+.store-card-content {
+  position: relative;
+  z-index: 2;
+}
+
+.store-location {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--leaf);
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+}
+
+.store-card h2 {
+  margin: 0 0 12px;
+  color: var(--orchard);
+  font-size: 1.65rem;
+  letter-spacing: -0.035em;
+}
+
+.store-card p {
+  min-height: 58px;
+  margin: 0;
+  color: rgba(32, 40, 32, 0.66);
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+
+.store-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 25px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(33, 74, 58, 0.08);
+}
+
+.store-card-footer span {
+  color: rgba(32, 40, 32, 0.58);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.store-card-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--orchard);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: gap 0.25s ease;
+}
+
+.store-card-footer a:hover {
+  gap: 12px;
+}
+
+/* =========================================================
+   EMPTY STORES
+   ========================================================= */
+
+.stores-empty,
+.store-empty-products {
+  width: min(650px, 100%);
+  margin: 40px auto;
+  padding: 55px 30px;
+  text-align: center;
+  border: 1px solid rgba(33, 74, 58, 0.1);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.stores-empty > div,
+.store-empty-products > div {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.stores-empty h2,
+.store-empty-products h3 {
+  margin: 0 0 10px;
+  color: var(--orchard);
+}
+
+.stores-empty p,
+.store-empty-products p {
+  margin: 0;
+  color: rgba(32, 40, 32, 0.62);
+  line-height: 1.7;
+}
+
+/* =========================================================
+   INDIVIDUAL STORE HERO
+   ========================================================= */
+
+.store-hero {
+  position: relative;
+  overflow: hidden;
+  width: min(1200px, 100%);
+  margin: 0 auto 70px;
+  padding: 65px;
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  border-radius: 42px;
+  background:
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(242, 140, 40, 0.28),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 15% 90%,
+      rgba(121, 169, 90, 0.25),
+      transparent 30%
+    ),
+    linear-gradient(135deg, rgba(33, 74, 58, 0.97), rgba(45, 91, 69, 0.91));
+  box-shadow: 0 35px 90px rgba(33, 74, 58, 0.18);
+}
+
+.store-hero::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  right: -100px;
+  bottom: -150px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 50%;
+}
+
+.store-hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.store-hero-badge {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff9ed;
+}
+
+.store-hero h1 {
+  max-width: 850px;
+  margin: 22px 0 15px;
+  color: var(--cream);
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.store-hero p {
+  max-width: 700px;
+  margin: 0;
+  color: rgba(255, 249, 237, 0.76);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.store-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.store-meta span {
+  padding: 10px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 249, 237, 0.84);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+/* =========================================================
+   STORE PRODUCTS
+   ========================================================= */
+
+.store-products {
+  width: min(1250px, 100%);
+  margin: 0 auto;
+}
+
+.section-heading {
+  margin-bottom: 28px;
+}
+
+.section-heading span {
+  color: var(--orange);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.16em;
+}
+
+.section-heading h2 {
+  margin: 8px 0 0;
+  color: var(--orchard);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  letter-spacing: -0.05em;
+}
+
+/* =========================================================
+   PRODUCT GRID
+   ========================================================= */
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.product-card {
+  overflow: hidden;
+  border: 1px solid rgba(33, 74, 58, 0.1);
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.66);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 18px 50px rgba(33, 74, 58, 0.07);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 28px 65px rgba(33, 74, 58, 0.12);
+}
+
+.product-image {
+  height: 210px;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(121, 169, 90, 0.18),
+    rgba(242, 140, 40, 0.12)
+  );
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.06);
+}
+
+.product-placeholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 4rem;
+}
+
+.product-info {
+  padding: 20px;
+}
+
+.product-category {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--leaf);
+  font-size: 0.7rem;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.product-info h3 {
+  margin: 0 0 8px;
+  color: var(--orchard);
+  font-size: 1.25rem;
+}
+
+.product-info p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  color: rgba(32, 40, 32, 0.6);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.product-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.product-bottom strong {
+  color: var(--orchard);
+  font-size: 1rem;
+}
+
+.product-bottom a {
+  color: var(--orange);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1050px) {
+  .stores-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .stores-page,
+  .store-page {
+    padding: 100px 5% 60px;
+  }
+
+  .store-hero {
+    padding: 42px 30px;
+    border-radius: 32px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .stores-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stores-header h1 {
+    font-size: 3rem;
+  }
+
+  .store-hero h1 {
+    font-size: 3rem;
+  }
+
+  .store-card {
+    min-height: auto;
+  }
+
+  .store-card-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .store-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

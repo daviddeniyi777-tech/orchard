@@ -1,0 +1,67 @@
+{% extends "base.html" %} {% block title %} Create Account — Orchard {% endblock
+%} {% block content %}
+
+<section class="auth-page">
+  <div class="auth-card">
+    <!-- Header -->
+    <div class="auth-header">
+      <span class="auth-icon">🍊</span>
+
+      <p class="auth-eyebrow">Welcome to Orchard</p>
+
+      <h1>Create your account.</h1>
+
+      <p>
+        Join Orchard and discover fresh fruits, vegetables and seeds from
+        trusted sellers.
+      </p>
+    </div>
+
+    <!-- Registration Form -->
+    <form method="POST" class="auth-form">
+      {{ form.hidden_tag() }}
+
+      <!-- Username -->
+      <div class="form-group">
+        {{ form.username.label }} {{ form.username( placeholder="Enter your
+        username" ) }} {% for error in form.username.errors %}
+
+        <small class="form-error"> {{ error }} </small>
+
+        {% endfor %}
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        {{ form.email.label }} {{ form.email( placeholder="you@example.com" ) }}
+        {% for error in form.email.errors %}
+
+        <small class="form-error"> {{ error }} </small>
+
+        {% endfor %}
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        {{ form.password.label }} {{ form.password( placeholder="Create a
+        password" ) }} {% for error in form.password.errors %}
+
+        <small class="form-error"> {{ error }} </small>
+
+        {% endfor %}
+      </div>
+
+      <!-- Submit -->
+      {{ form.submit(class="auth-button") }}
+    </form>
+
+    <!-- Login link -->
+    <p class="auth-switch">
+      Already have an account?
+
+      <a href="{{ url_for('auth.login') }}"> Login </a>
+    </p>
+  </div>
+</section>
+
+{% endblock %}

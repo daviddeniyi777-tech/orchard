@@ -1,0 +1,62 @@
+{% extends "base.html" %} {% block title %} Orchard Stores {% endblock %} {%
+block content %} {% block extra_css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/stores.css') }}"
+/>
+{% endblock %}
+
+<section class="stores-page">
+  <div class="stores-header">
+    <span class="stores-eyebrow"> VERIFIED ORCHARD SELLERS </span>
+
+    <h1>Discover Orchard Stores</h1>
+
+    <p>
+      Explore fresh produce and seeds from sellers growing and supplying food
+      through Orchard.
+    </p>
+  </div>
+
+  {% if stores %}
+
+  <div class="stores-grid">
+    {% for store in stores %}
+
+    <article class="store-card">
+      <div class="store-card-icon">🌱</div>
+
+      <div class="store-card-content">
+        <span class="store-location"> 📍 {{ store.location }} </span>
+
+        <h2>{{ store.name }}</h2>
+
+        <p>{{ store.description }}</p>
+
+        <div class="store-card-footer">
+          <span> {{ store.products|length }} products </span>
+
+          <a href="{{ url_for('store.store_detail', store_id=store.id) }}">
+            Visit Store →
+          </a>
+        </div>
+      </div>
+    </article>
+
+    {% endfor %}
+  </div>
+
+  {% else %}
+
+  <div class="stores-empty">
+    <div>🌱</div>
+
+    <h2>No stores yet</h2>
+
+    <p>Orchard stores will appear here when sellers create their stores.</p>
+  </div>
+
+  {% endif %}
+</section>
+
+{% endblock %}

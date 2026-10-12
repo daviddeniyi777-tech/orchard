@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block title %} Order Confirmed — Orchard {%
+endblock %} {% block content %}
+
+<section class="order-success-page">
+  <div class="order-success-card">
+    <div class="success-icon">✓</div>
+
+    <span class="success-label"> ORDER CONFIRMED </span>
+
+    <h1>Thank you for your order! 🍊</h1>
+
+    <p>Your fresh produce is officially on its way through Orchard.</p>
+
+    <div class="order-number">
+      <span> Order number </span>
+
+      <strong> #{{ order.id }} </strong>
+    </div>
+
+    <div class="success-details">
+      <div>
+        <span>Status</span>
+        <strong>{{ order.status|title }}</strong>
+      </div>
+
+      <div>
+        <span>Total</span>
+        <strong> ₦{{ "{:,.2f}".format(order.total) }} </strong>
+      </div>
+    </div>
+
+    <div class="success-actions">
+      <a href="{{ url_for('product.orders') }}"> View My Orders </a>
+
+      <a href="{{ url_for('product.products') }}" class="secondary-success">
+        Continue Shopping
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

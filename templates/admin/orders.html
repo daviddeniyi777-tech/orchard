@@ -1,0 +1,68 @@
+{% extends "base.html" %} {% block title %} Orders — Admin — Orchard {% endblock
+%} {% block content %}
+
+<section class="admin-page">
+  <div class="admin-shell">
+    <div class="admin-section-heading">
+      <span> MARKETPLACE OPERATIONS </span>
+
+      <h1>All orders</h1>
+
+      <p>Keep an eye on every order moving through Orchard.</p>
+    </div>
+
+    {% if orders %}
+
+    <div class="admin-orders">
+      {% for order in orders %}
+
+      <article class="admin-order-card">
+        <div class="admin-order-number">
+          <span> ORDER </span>
+
+          <strong> #{{ order.id }} </strong>
+        </div>
+
+        <div>
+          <span class="admin-order-label"> CUSTOMER </span>
+
+          <strong> {{ order.user.username }} </strong>
+        </div>
+
+        <div>
+          <span class="admin-order-label"> TOTAL </span>
+
+          <strong> ₦{{ "{:,.2f}".format(order.total) }} </strong>
+        </div>
+
+        <div>
+          <span class="admin-order-label"> STATUS </span>
+
+          <span class="admin-order-status"> {{ order.status|title }} </span>
+        </div>
+
+        <div>
+          <span class="admin-order-label"> DATE </span>
+
+          <strong> {{ order.created_at.strftime( "%d %b %Y" ) }} </strong>
+        </div>
+      </article>
+
+      {% endfor %}
+    </div>
+
+    {% else %}
+
+    <div class="admin-empty">
+      <div>📦</div>
+
+      <h2>No orders yet.</h2>
+
+      <p>Orders will appear here when customers start shopping.</p>
+    </div>
+
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,207 @@
+{% extends "base.html" %} {% block title %}Admin Dashboard — Orchard{% endblock
+%} {% block extra_css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/admin.css') }}"
+/>
+{% endblock %} {% block content %}
+
+<section class="admin-page">
+  <div class="admin-container">
+    <!-- HEADER -->
+    <div class="admin-header">
+      <div>
+        <span class="admin-eyebrow"> 🌿 ORCHARD ADMIN </span>
+
+        <h1>Admin Dashboard</h1>
+
+        <p>Manage your Orchard marketplace from one place.</p>
+      </div>
+
+      <div class="admin-badge">
+        <span>●</span>
+        Administrator
+      </div>
+    </div>
+
+    <!-- STATISTICS -->
+    <div class="admin-stats">
+      <article class="admin-stat admin-stat--green">
+        <div class="admin-stat__icon">👥</div>
+
+        <div>
+          <span>USERS</span>
+          <strong>{{ total_users }}</strong>
+          <small>Registered accounts</small>
+        </div>
+      </article>
+
+      <article class="admin-stat admin-stat--orange">
+        <div class="admin-stat__icon">🌱</div>
+
+        <div>
+          <span>SELLERS</span>
+          <strong>{{ total_sellers }}</strong>
+          <small>Active sellers</small>
+        </div>
+      </article>
+
+      <article class="admin-stat admin-stat--leaf">
+        <div class="admin-stat__icon">🏪</div>
+
+        <div>
+          <span>STORES</span>
+          <strong>{{ total_stores }}</strong>
+          <small>Orchard stores</small>
+        </div>
+      </article>
+
+      <article class="admin-stat admin-stat--berry">
+        <div class="admin-stat__icon">📦</div>
+
+        <div>
+          <span>PRODUCTS</span>
+          <strong>{{ total_products }}</strong>
+          <small>Listed products</small>
+        </div>
+      </article>
+
+      <article class="admin-stat admin-stat--lemon">
+        <div class="admin-stat__icon">🛒</div>
+
+        <div>
+          <span>ORDERS</span>
+          <strong>{{ total_orders }}</strong>
+          <small>Total orders</small>
+        </div>
+      </article>
+    </div>
+
+    <!-- PENDING SELLERS -->
+    <div class="admin-review">
+      <div class="admin-review__content">
+        <div class="admin-review__icon">⏳</div>
+
+        <div>
+          <span class="admin-review__eyebrow"> SELLER VERIFICATION </span>
+
+          <h2>
+            {{ pending_sellers }} seller {% if pending_sellers != 1 %}
+            applications {% else %} application {% endif %} waiting for review.
+          </h2>
+
+          <p>
+            Review seller applications and decide who can start selling on
+            Orchard.
+          </p>
+        </div>
+      </div>
+
+      <a
+        href="{{ url_for('admin.seller_applications') }}"
+        class="admin-review__button"
+      >
+        Review Applications
+        <span>→</span>
+      </a>
+    </div>
+
+    <!-- ADMIN ACTIONS -->
+    <div class="admin-section-heading">
+      <div>
+        <span>CONTROL CENTER</span>
+        <h2>Manage Orchard</h2>
+      </div>
+
+      <span class="admin-section-heading__leaf"> 🍃 </span>
+    </div>
+
+    <div class="admin-actions">
+      <!-- SELLERS -->
+      <a
+        href="{{ url_for('admin.seller_applications') }}"
+        class="admin-action admin-action--green"
+      >
+        <div class="admin-action__icon">🌱</div>
+
+        <div class="admin-action__content">
+          <span>SELLER MANAGEMENT</span>
+
+          <h3>Seller Applications</h3>
+
+          <p>Review, approve or reject seller applications.</p>
+        </div>
+
+        <span class="admin-action__arrow"> → </span>
+      </a>
+
+      <!-- ORDERS -->
+      <a
+        href="{{ url_for('admin.orders') }}"
+        class="admin-action admin-action--berry"
+      >
+        <div class="admin-action__icon">🛒</div>
+
+        <div class="admin-action__content">
+          <span>ORDER MANAGEMENT</span>
+
+          <h3>Orders</h3>
+
+          <p>View customer orders and their current status.</p>
+        </div>
+
+        <span class="admin-action__arrow"> → </span>
+      </a>
+
+      <!-- USERS -->
+      <div class="admin-action admin-action--orange admin-action--disabled">
+        <div class="admin-action__icon">👥</div>
+
+        <div class="admin-action__content">
+          <span>COMING NEXT</span>
+
+          <h3>Users</h3>
+
+          <p>Manage Orchard customer accounts.</p>
+        </div>
+
+        <span class="admin-action__tag"> SOON </span>
+      </div>
+
+      <!-- PRODUCTS -->
+      <a
+        href="{{ url_for('product.products') }}"
+        class="admin-action admin-action--leaf"
+      >
+        <div class="admin-action__icon">🍊</div>
+
+        <div class="admin-action__content">
+          <span>MARKETPLACE</span>
+
+          <h3>Products</h3>
+
+          <p>Browse all products currently listed on Orchard.</p>
+        </div>
+
+        <span class="admin-action__arrow"> → </span>
+      </a>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="admin-footer">
+      <div>
+        <span>🌳</span>
+
+        <div>
+          <strong> Orchard Control Center </strong>
+
+          <small> Keeping the marketplace fresh, trusted and growing. </small>
+        </div>
+      </div>
+
+      <a href="{{ url_for('main.home') }}"> Back to Orchard → </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

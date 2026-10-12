@@ -1,0 +1,113 @@
+{% extends "base.html" %} {% block title %} Your Basket — Orchard {% endblock %}
+{% block content %}
+
+<section class="cart-page">
+  <div class="cart-container">
+    <div class="cart-heading">
+      <span> 🛒 YOUR ORCHARD BASKET </span>
+
+      <h1>Your Basket</h1>
+
+      <p>Everything you've picked from the Orchard.</p>
+    </div>
+
+    {% if cart_items %}
+
+    <div class="cart-layout">
+      <div class="cart-items">
+        {% for item in cart_items %}
+
+        <article class="cart-item">
+          <div class="cart-item-image">
+            {% if item.product.image_url %}
+
+            <img
+              src="{{ url_for(
+                                            'static',
+                                            filename=item.product.image_url
+                                        ) }}"
+              alt="{{ item.product.name }}"
+            />
+
+            {% else %}
+
+            <span> 🌱 </span>
+
+            {% endif %}
+          </div>
+
+          <div class="cart-item-info">
+            <span>
+              {% if item.product.category == "fruit" %} 🍎 Fruit {% elif
+              item.product.category == "vegetable" %} 🥬 Vegetable {% else %} 🌱
+              Seed {% endif %}
+            </span>
+
+            <h2>{{ item.product.name }}</h2>
+
+            <p>
+              ₦{{ "{:,.2f}".format(item.product.price) }} × {{ item.quantity }}
+            </p>
+          </div>
+
+          <div class="cart-item-total">
+            <strong> ₦{{ "{:,.2f}".format(item.subtotal) }} </strong>
+
+            <form
+              method="POST"
+              action="{{ url_for(
+                                        'product.remove_from_cart',
+                                        product_id=item.product.id
+                                    ) }}"
+            >
+              <button type="submit">Remove</button>
+            </form>
+          </div>
+        </article>
+
+        {% endfor %}
+      </div>
+
+      <aside class="cart-summary">
+        <span> ORDER SUMMARY </span>
+
+        <h2>Your basket</h2>
+
+        <div class="summary-line">
+          <span> Items </span>
+
+          <strong> {{ cart_items|length }} </strong>
+        </div>
+
+        <div class="summary-total">
+          <span> Total </span>
+
+          <strong> ₦{{ "{:,.2f}".format(total) }} </strong>
+        </div>
+
+        <a href="{{ url_for('product.checkout') }}" class="checkout-button">
+          Continue to Checkout →
+        </a>
+        <a href="{{ url_for('product.products') }}" class="continue-shopping">
+          ← Continue shopping
+        </a>
+      </aside>
+    </div>
+
+    {% else %}
+
+    <div class="empty-cart">
+      <div>🛒</div>
+
+      <h2>Your basket is empty</h2>
+
+      <p>Find something fresh and beautiful to bring home.</p>
+
+      <a href="{{ url_for('product.products') }}"> Explore Products → </a>
+    </div>
+
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

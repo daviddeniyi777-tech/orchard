@@ -1,0 +1,117 @@
+{% extends "base.html" %} {% block title %} Checkout — Orchard {% endblock %} {%
+block content %}
+
+<section class="checkout-page">
+  <div class="checkout-container">
+    <div class="checkout-heading">
+      <span> 🌱 ORCHARD CHECKOUT </span>
+
+      <h1>Almost there.</h1>
+
+      <p>Tell us where you'd like your fresh produce delivered.</p>
+    </div>
+
+    <div class="checkout-layout">
+      <!-- DELIVERY FORM -->
+
+      <div class="checkout-card">
+        <div class="checkout-card-heading">
+          <span class="checkout-number"> 01 </span>
+
+          <div>
+            <h2>Delivery details</h2>
+
+            <p>Where should we deliver your order?</p>
+          </div>
+        </div>
+
+        <form method="POST" class="checkout-form">
+          {{ form.hidden_tag() }}
+
+          <div class="checkout-field">
+            {{ form.delivery_address.label }} {{ form.delivery_address(
+            placeholder="Enter your full delivery address..." ) }} {% for error
+            in form.delivery_address.errors %}
+
+            <small class="field-error"> {{ error }} </small>
+
+            {% endfor %}
+          </div>
+
+          <div class="checkout-field">
+            {{ form.phone.label }} {{ form.phone( placeholder="08012345678" ) }}
+            {% for error in form.phone.errors %}
+
+            <small class="field-error"> {{ error }} </small>
+
+            {% endfor %}
+          </div>
+
+          <div class="checkout-field">
+            {{ form.payment_method.label }} {{ form.payment_method() }}
+          </div>
+
+          {{ form.submit( class="place-order-button" ) }}
+        </form>
+      </div>
+
+      <!-- ORDER SUMMARY -->
+
+      <aside class="checkout-summary">
+        <span> YOUR ORDER </span>
+
+        <h2>Order summary</h2>
+
+        <div class="checkout-items">
+          {% for item in cart_items %}
+
+          <div class="checkout-item">
+            <div class="checkout-item-image">
+              {% if item.product.image_url %}
+
+              <img
+                src="{{ url_for(
+                                            'static',
+                                            filename=item.product.image_url
+                                        ) }}"
+                alt="{{ item.product.name }}"
+              />
+
+              {% else %} 🌱 {% endif %}
+            </div>
+
+            <div class="checkout-item-info">
+              <strong> {{ item.product.name }} </strong>
+
+              <span>
+                {{ item.quantity }} × ₦{{ "{:,.2f}".format(item.product.price)
+                }}
+              </span>
+            </div>
+
+            <strong class="checkout-item-price">
+              ₦{{ "{:,.2f}".format(item.subtotal) }}
+            </strong>
+          </div>
+
+          {% endfor %}
+        </div>
+
+        <div class="checkout-total">
+          <span> Total </span>
+
+          <strong> ₦{{ "{:,.2f}".format(total) }} </strong>
+        </div>
+
+        <div class="checkout-note">
+          🌿
+          <span>
+            Your order is being placed with a verified Orchard seller.
+          </span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

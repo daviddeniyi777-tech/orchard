@@ -1,0 +1,184 @@
+{% extends "base.html" %} {% block title %} {{ product.name }} — Orchard {%
+endblock %} {% block content %}
+
+<section class="product-detail-page">
+  <div class="product-detail-container">
+    <!-- Back -->
+    <a href="{{ url_for('product.products') }}" class="product-back">
+      ← Back to products
+    </a>
+
+    <div class="product-detail-card">
+      <!-- PRODUCT IMAGE -->
+      <div class="product-detail-image">
+        {% if product.image_url %}
+
+        <img
+          src="{{ url_for(
+            'static',
+            filename=product.image_url
+          ) }}"
+          alt="{{ product.name }}"
+        />
+
+        {% else %}
+
+        <div class="detail-placeholder">🌱</div>
+
+        {% endif %}
+      </div>
+
+      <!-- PRODUCT INFORMATION -->
+      <div class="product-detail-info">
+        <!-- Category -->
+        <span class="detail-category">
+          {% if product.category == "fruit" %} 🍎 Fruit {% elif product.category
+          == "vegetable" %} 🥬 Vegetable {% else %} 🌱 Seed {% endif %}
+        </span>
+
+        <!-- Name -->
+        <h1>{{ product.name }}</h1>
+
+        <!-- Price -->
+        <div class="detail-price">₦{{ "{:,.2f}".format(product.price) }}</div>
+
+        <!-- Stock -->
+        {% if product.stock > 0 %}
+
+        <div class="stock available">
+          <span></span>
+          {{ product.stock }} available
+        </div>
+
+        {% else %}
+
+        <div class="stock unavailable">
+          <span></span>
+          Out of stock
+        </div>
+
+        {% endif %}
+
+        <!-- Description -->
+        <div class="detail-section">
+          <h3>About this product</h3>
+
+          <p>{{ product.description }}</p>
+        </div>
+
+        <!-- STORE -->
+        <div class="seller-card">
+          <div class="seller-icon">🌱</div>
+
+          <div>
+            <span> Sold by </span>
+
+            <strong> {{ product.store.name }} </strong>
+
+            <small> 📍 {{ product.store.location }} </small>
+          </div>
+        </div>
+
+        <!-- PURCHASE AREA -->
+
+        {% if product.stock > 0 %}
+
+        <form
+          method="POST"
+          action="{{ url_for(
+            'product.add_to_cart',
+            product_id=product.id
+        ) }}"
+          class="purchase-area"
+        >
+          <div class="quantity-control">
+            <button type="button" id="decrease">−</button>
+
+            <input
+              type="number"
+              name="quantity"
+              id="quantity"
+              value="1"
+              min="1"
+              max="{{ product.stock }}"
+            />
+
+            <button type="button" id="increase">+</button>
+          </div>
+
+          <button type="submit" class="add-cart-button">🛒 Add to Cart</button>
+        </form>
+
+        {% else %}
+
+        <button type="button" class="add-cart-button disabled" disabled>
+          Out of Stock
+        </button>
+
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUANTITY JAVASCRIPT -->
+
+<script>
+
+  const decreaseButton =
+      document.getElementById("decrease");
+
+  const increaseButton =
+      document.getElementById("increase");
+
+  const quantityInput =
+      document.getElementById("quantity");
+
+
+  if (quantityInput) {
+
+      const maxStock =
+          {{ product.stock }};
+
+
+      decreaseButton.addEventListener(
+          "click",
+          function () {
+
+              let quantity =
+                  parseInt(quantityInput.value) || 1;
+
+
+              if (quantity > 1) {
+
+                  quantityInput.value =
+                      quantity - 1;
+
+              }
+
+          }
+      );
+
+
+      increaseButton.addEventListener(
+          "click",
+          function () {
+
+              let quantity =
+                  parseInt(quantityInput.value) || 1;
+
+
+              if (quantity < maxStock) {
+
+                  quantityInput.value =
+                      quantity + 1;
+
+              }
+
+          }
+      );
+
+  }
+</script>
+
+{% endblock %}

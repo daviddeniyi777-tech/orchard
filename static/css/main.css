@@ -1,0 +1,90 @@
+:root {
+  --orchard: #214a3a;
+  --cream: #fff9ed;
+
+  --orange: #f28c28;
+  --berry: #d94f70;
+  --lemon: #f4c84a;
+  --leaf: #79a95a;
+
+  --soil: #202820;
+  --white: #fffef9;
+
+  --border: rgba(33, 74, 58, 0.12);
+
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+
+  --shadow-soft: 0 20px 60px rgba(33, 74, 58, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--soil);
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+.footer {
+  margin-top: 80px;
+
+  padding: 50px 24px;
+
+  background: var(--orchard);
+
+  color: var(--white);
+}
+
+.footer__inner {
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 30px;
+}
+
+.footer__brand h2 {
+  margin-bottom: 8px;
+
+  font-size: 22px;
+
+  letter-spacing: 2px;
+}
+
+.footer__brand p {
+  max-width: 300px;
+
+  opacity: 0.72;
+}
+
+.footer__copyright {
+  opacity: 0.6;
+
+  font-size: 13px;
+}

@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block title %} Create Your Store — Orchard {%
+endblock %} {% block content %}
+
+<section class="store-create-page">
+  <div class="store-create-card">
+    <div class="store-create-header">
+      <span class="store-create-icon"> 🌱 </span>
+
+      <p class="store-create-eyebrow">ORCHARD SELLER</p>
+
+      <h1>Create your store.</h1>
+
+      <p>Give your farm or produce business a home on Orchard.</p>
+    </div>
+
+    <form method="POST" class="store-form">
+      {{ form.hidden_tag() }}
+
+      <div class="form-group">
+        {{ form.name.label }} {{ form.name( placeholder="e.g. Green Valley Farm"
+        ) }} {% for error in form.name.errors %}
+
+        <small class="form-error"> {{ error }} </small>
+
+        {% endfor %}
+      </div>
+
+      <div class="form-group">
+        {{ form.description.label }} {{ form.description( placeholder="Tell
+        customers about your farm or business..." ) }} {% for error in
+        form.description.errors %}
+
+        <small class="form-error"> {{ error }} </small>
+
+        {% endfor %}
+      </div>
+
+      <div class="form-group">
+        {{ form.location.label }} {{ form.location( placeholder="e.g. Ibadan,
+        Oyo State" ) }} {% for error in form.location.errors %}
+
+        <small class="form-error"> {{ error }} </small>
+
+        {% endfor %}
+      </div>
+
+      {{ form.submit( class="auth-button" ) }}
+    </form>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,956 @@
+/* =========================================================
+   ORCHARD AUTH
+   Clean Premium Authentication
+========================================================= */
+
+:root {
+  --orchard: #214a3a;
+  --orchard-dark: #153126;
+  --cream: #fff9ed;
+  --orange: #f28c28;
+  --berry: #d94f70;
+  --lemon: #f4c84a;
+  --leaf: #79a95a;
+  --soil: #202820;
+  --white: #fffef9;
+  --muted: #6b756d;
+  --line: rgba(33, 74, 58, 0.14);
+}
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.auth-page {
+  position: relative;
+
+  min-height: calc(100vh - 80px);
+
+  padding: 70px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 10% 15%,
+      rgba(244, 200, 74, 0.22),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(217, 79, 112, 0.12),
+      transparent 25%
+    ),
+    var(--cream);
+}
+
+/* Decorative background circles */
+
+.auth-page::before {
+  content: "";
+
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  left: -220px;
+  top: 20%;
+
+  border-radius: 50%;
+
+  background: rgba(121, 169, 90, 0.08);
+
+  pointer-events: none;
+}
+
+.auth-page::after {
+  content: "";
+
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  right: -150px;
+  bottom: 5%;
+
+  border-radius: 50%;
+
+  background: rgba(242, 140, 40, 0.09);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   AUTH CARD
+========================================================= */
+
+.auth-card {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(100%, 510px);
+
+  padding: 0;
+
+  overflow: hidden;
+
+  background: rgba(255, 254, 249, 0.96);
+
+  border: 1px solid rgba(33, 74, 58, 0.09);
+
+  border-radius: 32px;
+
+  box-shadow:
+    0 25px 80px rgba(33, 74, 58, 0.13),
+    0 5px 20px rgba(32, 40, 32, 0.04);
+}
+
+/* =========================================================
+   TOP BRAND AREA
+========================================================= */
+
+.auth-card::before {
+  content: "";
+
+  display: block;
+
+  height: 145px;
+
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(244, 200, 74, 0.28),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      rgba(121, 169, 90, 0.2),
+      transparent 28%
+    ),
+    linear-gradient(135deg, var(--orchard), var(--orchard-dark));
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.auth-header {
+  position: relative;
+
+  padding: 42px 55px 10px;
+
+  text-align: center;
+}
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.auth-icon {
+  position: absolute;
+
+  left: 50%;
+  top: -43px;
+
+  width: 86px;
+  height: 86px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: translateX(-50%);
+
+  border-radius: 26px;
+
+  background: var(--white);
+
+  border: 6px solid rgba(255, 254, 249, 0.75);
+
+  box-shadow: 0 15px 35px rgba(33, 74, 58, 0.18);
+
+  font-size: 34px;
+
+  animation: orchardIconFloat 4s ease-in-out infinite;
+}
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.auth-eyebrow {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 0 0 13px;
+
+  color: var(--orange);
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.15em;
+
+  text-transform: uppercase;
+}
+
+.auth-eyebrow::before {
+  content: "";
+
+  width: 22px;
+  height: 2px;
+
+  border-radius: 99px;
+
+  background: var(--orange);
+}
+
+.auth-eyebrow::after {
+  content: "";
+
+  width: 22px;
+  height: 2px;
+
+  border-radius: 99px;
+
+  background: var(--orange);
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.auth-header h1 {
+  margin: 0;
+
+  color: var(--soil);
+
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
+
+  line-height: 1;
+
+  font-weight: 900;
+
+  letter-spacing: -0.055em;
+}
+
+.auth-header h1::after {
+  content: "";
+
+  display: block;
+
+  width: 42px;
+  height: 5px;
+
+  margin: 17px auto 0;
+
+  border-radius: 999px;
+
+  background: linear-gradient(90deg, var(--orange), var(--berry));
+}
+
+/* Description */
+
+.auth-header > p:last-child {
+  max-width: 380px;
+
+  margin: 17px auto 0;
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.auth-form {
+  padding: 25px 55px 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.auth-form .form-group {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.auth-form .form-group label {
+  color: var(--soil);
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.02em;
+}
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.auth-form input {
+  width: 100%;
+
+  height: 52px;
+
+  box-sizing: border-box;
+
+  padding: 0 16px;
+
+  border: 1px solid var(--line);
+
+  border-radius: 14px;
+
+  outline: none;
+
+  background: #fbfcf8;
+
+  color: var(--soil);
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.auth-form input::placeholder {
+  color: rgba(32, 40, 32, 0.34);
+}
+
+.auth-form input:hover {
+  border-color: rgba(33, 74, 58, 0.25);
+}
+
+.auth-form input:focus {
+  border-color: var(--orange);
+
+  background: var(--white);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 0 0 4px rgba(242, 140, 40, 0.09),
+    0 8px 20px rgba(33, 74, 58, 0.06);
+}
+
+/* =========================================================
+   ERRORS
+========================================================= */
+
+.auth-form .form-error {
+  margin: 0;
+
+  color: var(--berry);
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.auth-button {
+  width: 100%;
+
+  height: 54px;
+
+  margin-top: 4px;
+
+  border: none;
+
+  border-radius: 15px;
+
+  background: var(--orchard);
+
+  color: var(--white);
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.02em;
+
+  cursor: pointer;
+
+  box-shadow: 0 12px 25px rgba(33, 74, 58, 0.18);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.auth-button::after {
+  content: "  →";
+
+  font-size: 15px;
+}
+
+.auth-button:hover {
+  transform: translateY(-3px);
+
+  background: var(--orange);
+
+  box-shadow: 0 15px 30px rgba(242, 140, 40, 0.22);
+}
+
+.auth-button:active {
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   LOGIN / REGISTER SWITCH
+========================================================= */
+
+.auth-switch {
+  margin: 0;
+
+  padding: 22px 55px 35px;
+
+  color: rgba(32, 40, 32, 0.52);
+
+  font-size: 11px;
+
+  text-align: center;
+}
+
+.auth-switch a {
+  margin-left: 4px;
+
+  color: var(--orchard);
+
+  font-weight: 900;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.auth-switch a:hover {
+  color: var(--orange);
+}
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes orchardIconFloat {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 600px) {
+  .auth-page {
+    min-height: calc(100vh - 65px);
+
+    padding: 40px 15px;
+  }
+
+  .auth-card {
+    border-radius: 26px;
+  }
+
+  .auth-card::before {
+    height: 125px;
+  }
+
+  .auth-header {
+    padding: 38px 28px 10px;
+  }
+
+  .auth-icon {
+    width: 76px;
+    height: 76px;
+
+    top: -38px;
+
+    border-radius: 22px;
+
+    font-size: 29px;
+  }
+
+  .auth-header h1 {
+    font-size: 2.25rem;
+  }
+
+  .auth-header > p:last-child {
+    font-size: 12px;
+  }
+
+  .auth-form {
+    padding: 22px 28px 0;
+
+    gap: 17px;
+  }
+
+  .auth-form input {
+    height: 51px;
+  }
+
+  .auth-switch {
+    padding: 20px 28px 28px;
+  }
+}
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 400px) {
+  .auth-page {
+    padding: 25px 10px;
+  }
+
+  .auth-header {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .auth-header h1 {
+    font-size: 2rem;
+  }
+
+  .auth-form {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .auth-switch {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+/* =========================================
+   ORCHARD SELLER PORTAL
+========================================= */
+
+.seller-portal {
+  position: relative;
+  isolation: isolate;
+
+  width: min(100%, 760px);
+  margin: 40px auto;
+
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  padding: 28px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 254, 249, 0.82),
+    rgba(255, 249, 237, 0.62)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  border-radius: 30px;
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  box-shadow:
+    0 24px 70px rgba(33, 74, 58, 0.11),
+    0 5px 18px rgba(33, 74, 58, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* =========================================
+   ORGANIC BACKGROUND GLOW
+========================================= */
+
+.seller-portal::before {
+  content: "";
+
+  position: absolute;
+
+  width: 190px;
+  height: 190px;
+
+  top: -100px;
+  right: -60px;
+
+  background: rgba(244, 200, 74, 0.22);
+
+  border-radius: 50%;
+
+  filter: blur(4px);
+
+  z-index: -1;
+}
+
+.seller-portal::after {
+  content: "";
+
+  position: absolute;
+
+  width: 150px;
+  height: 150px;
+
+  bottom: -90px;
+  left: -55px;
+
+  background: rgba(121, 169, 90, 0.16);
+
+  border-radius: 50%;
+
+  z-index: -1;
+}
+
+/* =========================================
+   HOVER
+========================================= */
+
+.seller-portal:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 32px 80px rgba(33, 74, 58, 0.15),
+    0 8px 24px rgba(33, 74, 58, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* =========================================
+   ICON
+========================================= */
+
+.seller-portal__icon {
+  flex: 0 0 74px;
+
+  width: 74px;
+  height: 74px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 24px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(33, 74, 58, 0.14),
+    rgba(121, 169, 90, 0.1)
+  );
+
+  border: 1px solid rgba(33, 74, 58, 0.1);
+
+  font-size: 30px;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 10px 25px rgba(33, 74, 58, 0.08);
+
+  transition:
+    transform 0.35s ease,
+    border-radius 0.35s ease;
+}
+
+.seller-portal:hover .seller-portal__icon {
+  transform: rotate(-4deg) scale(1.05);
+  border-radius: 20px;
+}
+
+/* =========================================
+   ICON VARIATIONS
+========================================= */
+
+.seller-portal__icon--orange {
+  background: linear-gradient(
+    145deg,
+    rgba(242, 140, 40, 0.17),
+    rgba(244, 200, 74, 0.12)
+  );
+
+  border-color: rgba(242, 140, 40, 0.15);
+}
+
+.seller-portal__icon--berry {
+  background: linear-gradient(
+    145deg,
+    rgba(217, 79, 112, 0.15),
+    rgba(242, 140, 40, 0.1)
+  );
+
+  border-color: rgba(217, 79, 112, 0.14);
+}
+
+.seller-portal__icon--lemon {
+  background: linear-gradient(
+    145deg,
+    rgba(244, 200, 74, 0.2),
+    rgba(255, 249, 237, 0.65)
+  );
+
+  border-color: rgba(244, 200, 74, 0.18);
+}
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.seller-portal__content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* =========================================
+   EYEBROW
+========================================= */
+
+.seller-portal__eyebrow {
+  display: inline-block;
+
+  margin-bottom: 7px;
+
+  color: var(--orange);
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   HEADING
+========================================= */
+
+.seller-portal__content h3 {
+  margin: 0 0 7px;
+
+  color: var(--orchard);
+
+  font-size: clamp(20px, 3vw, 26px);
+
+  font-weight: 900;
+
+  letter-spacing: -0.6px;
+
+  line-height: 1.15;
+}
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.seller-portal__content p {
+  max-width: 520px;
+
+  margin: 0 0 18px;
+
+  color: rgba(32, 40, 32, 0.64);
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.seller-portal__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  min-height: 44px;
+
+  padding: 0 18px;
+
+  border-radius: 14px;
+
+  color: var(--white);
+
+  font-size: 12px;
+  font-weight: 800;
+
+  text-decoration: none;
+
+  box-shadow: 0 9px 22px rgba(33, 74, 58, 0.16);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.seller-portal__button span {
+  font-size: 17px;
+
+  transition: transform 0.25s ease;
+}
+
+.seller-portal__button:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 14px 28px rgba(33, 74, 58, 0.2);
+}
+
+.seller-portal__button:hover span {
+  transform: translateX(4px);
+}
+
+/* =========================================
+   BUTTON COLORS
+========================================= */
+
+.seller-portal__button--green {
+  background: var(--orchard);
+}
+
+.seller-portal__button--green:hover {
+  background: #183a2d;
+}
+
+.seller-portal__button--orange {
+  background: var(--orange);
+
+  box-shadow: 0 9px 22px rgba(242, 140, 40, 0.2);
+}
+
+.seller-portal__button--orange:hover {
+  background: #df7818;
+}
+
+.seller-portal__button--berry {
+  background: var(--berry);
+
+  box-shadow: 0 9px 22px rgba(217, 79, 112, 0.18);
+}
+
+.seller-portal__button--berry:hover {
+  background: #c94262;
+}
+
+/* =========================================
+   PENDING STATUS
+========================================= */
+
+.seller-portal__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 9px 13px;
+
+  border-radius: 999px;
+
+  background: rgba(244, 200, 74, 0.13);
+
+  border: 1px solid rgba(244, 200, 74, 0.2);
+
+  color: #8b6a09;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.seller-portal__status-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: var(--lemon);
+
+  box-shadow: 0 0 0 4px rgba(244, 200, 74, 0.12);
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .seller-portal {
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 24px;
+
+    border-radius: 26px;
+  }
+
+  .seller-portal__icon {
+    width: 62px;
+    height: 62px;
+
+    flex-basis: 62px;
+
+    border-radius: 20px;
+
+    font-size: 25px;
+  }
+
+  .seller-portal__content {
+    width: 100%;
+  }
+
+  .seller-portal__content h3 {
+    font-size: 22px;
+  }
+
+  .seller-portal__content p {
+    font-size: 13px;
+  }
+
+  .seller-portal__button {
+    width: 100%;
+  }
+}

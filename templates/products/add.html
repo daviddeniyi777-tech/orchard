@@ -1,0 +1,97 @@
+{% extends "base.html" %} {% block title %} Add Product — Orchard {% endblock %}
+{% block content %}
+
+<section class="product-create-page">
+  <div class="product-create-card">
+    <div class="product-create-header">
+      <span class="product-create-icon"> 🍊 </span>
+
+      <p class="product-create-eyebrow">YOUR ORCHARD STORE</p>
+
+      <h1>Add a product.</h1>
+
+      <p>Add fresh fruits, vegetables or seeds to your store.</p>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" class="product-form">
+      {{ form.hidden_tag() }}
+
+      <!-- Product Name -->
+
+      <div class="form-group">
+        {{ form.name.label }} {{ form.name( placeholder="e.g. Fresh Tomatoes" )
+        }} {% for error in form.name.errors %}
+
+        <small class="form-error"> {{ error }} </small>
+
+        {% endfor %}
+      </div>
+
+      <!-- Description -->
+
+      <div class="form-group">
+        {{ form.description.label }} {{ form.description( placeholder="Describe
+        your product..." ) }} {% for error in form.description.errors %}
+
+        <small class="form-error"> {{ error }} </small>
+
+        {% endfor %}
+      </div>
+
+      <!-- Price -->
+
+      <div class="form-group">
+        {{ form.price.label }} {{ form.price( placeholder="e.g. 2500" ) }} {%
+        for error in form.price.errors %}
+
+        <small class="form-error"> {{ error }} </small>
+
+        {% endfor %}
+      </div>
+
+      <!-- Stock -->
+
+      <div class="form-group">
+        {{ form.stock.label }} {{ form.stock( placeholder="e.g. 50" ) }} {% for
+        error in form.stock.errors %}
+
+        <small class="form-error"> {{ error }} </small>
+
+        {% endfor %}
+      </div>
+
+      <!-- Category -->
+
+      <div class="form-group">
+        {{ form.category.label }} {{ form.category() }} {% for error in
+        form.category.errors %}
+
+        <small class="form-error"> {{ error }} </small>
+
+        {% endfor %}
+      </div>
+
+      <!-- Image -->
+
+      <div class="form-group">
+        {{ form.image.label }}
+
+        <div class="image-upload-box">
+          {{ form.image( accept=".jpg,.jpeg,.png,.webp" ) }}
+
+          <span> 📸 Choose a beautiful product image </span>
+
+          <small> PNG, JPG, JPEG or WEBP </small>
+        </div>
+
+        {% for error in form.image.errors %}
+
+        <small class="form-error"> {{ error }} </small>
+
+        {% endfor %}
+      </div>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

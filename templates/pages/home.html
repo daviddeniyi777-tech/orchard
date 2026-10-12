@@ -1,0 +1,435 @@
+{% extends "base.html" %} {% block title %}Orchard — Fresh From The People Who
+Grow It{% endblock %} {% block content %}
+
+<!-- =========================
+     HERO
+========================= -->
+<section class="hero" id="home">
+  <div class="hero__content">
+    <p class="hero__eyebrow">Fresh • Local • Verified</p>
+
+    <h1>Good food starts with good soil.</h1>
+
+    <p class="hero__description">
+      Discover fresh fruits, vegetables and seeds from verified farmers and
+      sellers.
+    </p>
+
+    <div class="hero__actions">
+      <a
+        href="{{ url_for('product.products') }}"
+        class="hero__button hero__button--primary"
+      >
+        Explore Produce
+      </a>
+
+      <a
+        href="{{ url_for('auth.register') }}"
+        class="hero__button hero__button--secondary"
+      >
+        Sell on Orchard
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     CATEGORIES
+========================= -->
+<section class="categories" id="categories">
+  <div class="categories__top">
+    <div class="categories__heading">
+      <p class="section-eyebrow">Explore the harvest</p>
+      <h2>Find something <span>fresh.</span></h2>
+    </div>
+
+    <p class="categories__intro">
+      Browse fresh fruits, vegetables and quality seeds from farmers and sellers
+      on Orchard.
+    </p>
+  </div>
+
+  <div class="category-grid">
+    <a
+      href="{{ url_for('product.products', category='fruit') }}"
+      class="category-card category-card--fruit"
+    >
+      <div class="category-card__top">
+        <span class="category-card__number">01</span>
+        <span class="category-card__arrow">↗</span>
+      </div>
+
+      <div class="category-card__visual">
+        <div class="category-card__circle">🍊</div>
+        <span class="category-card__leaf">✦</span>
+      </div>
+
+      <div class="category-card__bottom">
+        <div>
+          <p class="category-card__label">Naturally grown</p>
+          <h3>Fruits</h3>
+          <p class="category-card__description">
+            Sweet, fresh and seasonal produce from trusted growers.
+          </p>
+        </div>
+        <span class="category-card__link">Explore →</span>
+      </div>
+    </a>
+
+    <a
+      href="{{ url_for('product.products', category='vegetable') }}"
+      class="category-card category-card--vegetable"
+    >
+      <div class="category-card__top">
+        <span class="category-card__number">02</span>
+        <span class="category-card__arrow">↗</span>
+      </div>
+
+      <div class="category-card__visual">
+        <div class="category-card__circle">🥬</div>
+        <span class="category-card__leaf">✦</span>
+      </div>
+
+      <div class="category-card__bottom">
+        <div>
+          <p class="category-card__label">Fresh from the farm</p>
+          <h3>Vegetables</h3>
+          <p class="category-card__description">
+            Fresh greens and vegetables ready for your table.
+          </p>
+        </div>
+        <span class="category-card__link">Explore →</span>
+      </div>
+    </a>
+
+    <a
+      href="{{ url_for('product.products', category='seed') }}"
+      class="category-card category-card--seed"
+    >
+      <div class="category-card__top">
+        <span class="category-card__number">03</span>
+        <span class="category-card__arrow">↗</span>
+      </div>
+
+      <div class="category-card__visual">
+        <div class="category-card__circle">🌱</div>
+        <span class="category-card__leaf">✦</span>
+      </div>
+
+      <div class="category-card__bottom">
+        <div>
+          <p class="category-card__label">Start something new</p>
+          <h3>Seeds</h3>
+          <p class="category-card__description">
+            Quality seeds for farmers, gardeners and growers.
+          </p>
+        </div>
+        <span class="category-card__link">Explore →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- =========================
+     FEATURED PRODUCTS
+     Only ONE featured section
+========================= -->
+<section class="featured" id="featured">
+  <div class="featured__background-glow" aria-hidden="true"></div>
+
+  <div class="featured__inner">
+    <header class="featured__header">
+      <div class="featured__heading">
+        <p class="section-eyebrow">Fresh from Orchard</p>
+        <h2>Picked fresh <span>for you.</span></h2>
+      </div>
+
+      <div class="featured__header-side">
+        <p>
+          Discover fruits, vegetables and seeds from verified Orchard sellers.
+        </p>
+
+        <a href="{{ url_for('product.products') }}" class="featured__see-all">
+          Explore all produce <span>→</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="featured__slider">
+      <div class="featured__slider-controls">
+        <button
+          type="button"
+          class="featured__slider-button"
+          id="products-prev"
+          aria-label="Scroll to previous products"
+        >
+          ←
+        </button>
+
+        <button
+          type="button"
+          class="featured__slider-button"
+          id="products-next"
+          aria-label="Scroll to next products"
+        >
+          →
+        </button>
+      </div>
+
+      <div class="featured__products" id="featured-products">
+        {% for item in featured_products %}
+        <article class="product-card">
+          <div class="product-card__top">
+            <span class="product-card__category">
+              {% if item.category == "fruit" %} 🍎 Fruits {% elif item.category
+              == "vegetable" %} 🥬 Vegetables {% elif item.category == "seed" %}
+              🌱 Seeds {% else %} Produce {% endif %}
+            </span>
+
+            <span class="product-card__number">
+              {{ "%02d"|format(loop.index) }}
+            </span>
+          </div>
+
+          <a
+            class="product-card__visual"
+            href="{{ url_for('product.detail', product_id=item.id) }}"
+            aria-label="View {{ item.name }}"
+          >
+            {% if item.image_url %}
+            <img
+              src="{{ url_for('static', filename=item.image_url) }}"
+              alt="{{ item.name }}"
+              loading="lazy"
+            />
+            {% elif item.category == "fruit" %}
+            <span class="product-card__glass-circle">🍊</span>
+            {% elif item.category == "vegetable" %}
+            <span class="product-card__glass-circle">🥬</span>
+            {% else %}
+            <span class="product-card__glass-circle">🌱</span>
+            {% endif %}
+          </a>
+
+          <div class="product-card__details">
+            <div>
+              <h3>{{ item.name }}</h3>
+              <p>{{ item.store.name }}</p>
+            </div>
+
+            <strong>₦{{ "{:,.2f}".format(item.price) }}</strong>
+          </div>
+
+          <a
+            href="{{ url_for('product.detail', product_id=item.id) }}"
+            class="product-card__arrow"
+            aria-label="View {{ item.name }}"
+          >
+            →
+          </a>
+        </article>
+        {% else %}
+        <div class="featured__empty">
+          <span>🌱</span>
+          <h3>Your next favourite is growing.</h3>
+          <p>
+            New produce will appear here when verified sellers list products.
+          </p>
+          <a href="{{ url_for('product.products') }}">
+            Explore all produce →
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     VERIFIED FARMERS
+     This is its OWN section
+========================= -->
+<section class="farmers" id="farmers">
+  <div class="farmers__background" aria-hidden="true"></div>
+  <div class="farmers__shade" aria-hidden="true"></div>
+
+  <div class="farmers__inner">
+    <header class="farmers__header">
+      <div class="farmers__heading">
+        <p class="farmers__eyebrow">
+          <span class="farmers__eyebrow-dot"></span>
+          Verified farmers
+        </p>
+
+        <h2>Know who grew <span>your food.</span></h2>
+      </div>
+
+      <div class="farmers__intro">
+        <p>
+          Every store is reviewed by our team before it earns the Orchard
+          Verified badge.
+        </p>
+
+        <a href="{{ url_for('store.stores') }}" class="farmers__browse">
+          Browse all stores <span>→</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="farmers__grid">
+      {% for store in verified_stores %}
+      <article class="farmer-card">
+        <span class="farmer-card__number">
+          {{ "%02d"|format(loop.index) }}
+        </span>
+
+        <div class="farmer-card__avatar">{{ store.name[:1]|upper }}</div>
+
+        <div class="farmer-card__details">
+          <h3>{{ store.name }}</h3>
+          <p>{{ store.location }}</p>
+        </div>
+
+        <div class="farmer-card__bottom">
+          <span class="verified-badge">
+            <span aria-hidden="true">✓</span>
+            Orchard Verified
+          </span>
+
+          <span class="farmer-card__count">
+            {{ store.products | selectattr('is_active') | list | length }} items
+          </span>
+        </div>
+      </article>
+      {% else %}
+      <div class="featured__empty">
+        <span>🌿</span>
+        <h3>Good growers are on their way.</h3>
+        <p>
+          Verified stores will appear here when approved sellers create their
+          stores.
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     HOW ORCHARD WORKS
+     Separate from Farmers
+========================= -->
+<section class="how" id="how-it-works">
+  <div class="how__photo" aria-hidden="true"></div>
+  <div class="how__overlay" aria-hidden="true"></div>
+
+  <div class="how__inner">
+    <header class="how__header">
+      <div class="how__heading">
+        <p class="how__eyebrow">How Orchard works</p>
+        <h2>From the farm <span>to your door.</span></h2>
+      </div>
+
+      <div class="how__intro">
+        <p>
+          Four simple steps, whether you are buying fresh produce or selling
+          what you grow.
+        </p>
+      </div>
+    </header>
+
+    <div class="how__grid">
+      <article class="how-card">
+        <div class="how-card__top">
+          <span class="how-card__number">01</span>
+        </div>
+        <div class="how-card__visual how-card__visual--discover">
+          <span class="how-card__emoji">🔎</span>
+        </div>
+        <div class="how-card__content">
+          <h3>Discover</h3>
+          <p>Explore fruits, vegetables and seeds from verified sellers.</p>
+        </div>
+        <span class="how-card__arrow" aria-hidden="true">→</span>
+      </article>
+
+      <article class="how-card">
+        <div class="how-card__top">
+          <span class="how-card__number">02</span>
+        </div>
+        <div class="how-card__visual how-card__visual--basket">
+          <span class="how-card__emoji">🧺</span>
+        </div>
+        <div class="how-card__content">
+          <h3>Add to basket</h3>
+          <p>
+            Choose your quantities and add your favourite produce to your cart.
+          </p>
+        </div>
+        <span class="how-card__arrow" aria-hidden="true">→</span>
+      </article>
+
+      <article class="how-card">
+        <div class="how-card__top">
+          <span class="how-card__number">03</span>
+        </div>
+        <div class="how-card__visual how-card__visual--payment">
+          <span class="how-card__emoji">💳</span>
+        </div>
+        <div class="how-card__content">
+          <h3>Checkout</h3>
+          <p>Review your order and follow the available checkout process.</p>
+        </div>
+        <span class="how-card__arrow" aria-hidden="true">→</span>
+      </article>
+
+      <article class="how-card">
+        <div class="how-card__top">
+          <span class="how-card__number">04</span>
+        </div>
+        <div class="how-card__visual how-card__visual--receive">
+          <span class="how-card__emoji">🥑</span>
+        </div>
+        <div class="how-card__content">
+          <h3>Receive fresh</h3>
+          <p>
+            Your seller prepares your order for the agreed fulfilment method.
+          </p>
+        </div>
+        <span class="how-card__arrow" aria-hidden="true">→</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     SELLER CTA
+     Separate from How It Works
+========================= -->
+<section class="seller-cta" id="sell-on-orchard">
+  <div class="seller-cta__background" aria-hidden="true"></div>
+  <div class="seller-cta__overlay" aria-hidden="true"></div>
+
+  <div class="seller-cta__content">
+    <div class="seller-cta__text">
+      <p class="seller-cta__eyebrow">For farmers and sellers</p>
+
+      <h2>
+        Create a store.
+        <span>Get verified.</span>
+        Start selling.
+      </h2>
+
+      <p class="seller-cta__description">
+        Bring your fresh fruits, vegetables and seeds to people looking for good
+        food from trusted sellers.
+      </p>
+    </div>
+
+    <a href="{{ url_for('auth.register') }}" class="seller-cta__button">
+      Sell on Orchard <span>→</span>
+    </a>
+  </div>
+</section>
+
+{% endblock %}
